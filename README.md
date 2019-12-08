@@ -1,24 +1,33 @@
 # vue-big-tree
+一个可以用来渲染海量数据的Vue树形组件
 
-## Project setup
-```
-npm install
-```
+## Install
+`npm i vue-big-tree --save`
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
+## Use
+```html
+    <vueBigTree ref="bigTree" :tree="tree" :defaultExpand="true" :option="option">
+          <template v-slot="{ item, index }">
+            <div>{{ item.label }}</div>
+          </template>
+        </vueBigTree>
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Attributes
+| 参数      |    说明 | 类型  | 可选  | 默认值  |
+| :-------- | --------:|-------:|-------:| :--: |
+| tree  | 数据源 |  Array   |  -   |  -   |
+| defaultExpand  | 是否默认展开 |  Boolean   |  true/false   |  false   |
+| option  | 虚拟树配置 |  Object   |  -   |  -   |
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### option
+| 参数      |    说明 | 类型  | 可选  | 默认值  |
+| :-------- | --------:|-------:|-------:| :--: |
+| height  | 容器的高度 |  Number   |  -   |  500   |
+| itemHeight  | 单个节点的高度 |  Number   |  -   |  25   |
+
+### method
+#### 展开所有
+`this.$refs.bigTree.collapseAll()`
+#### 折叠所有
+`this.$refs.bigTree.expandAll()`
