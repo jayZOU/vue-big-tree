@@ -1,15 +1,19 @@
 {
   "name": "vue-big-tree",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.3",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-bundle": "vue-cli-service build --target lib --name vue-big-tree src/components/index.js",
     "lint": "vue-cli-service lint"
   },
+  "main": "./dist/vue-big-tree.common",
   "dependencies": {
     "core-js": "^3.4.3",
-    "vue": "^2.6.10"
+    "element-ui": "^2.12.0",
+    "vue": "^2.6.10",
+    "vue-big-tree": "^1.0.3",
+    "vue-router": "^3.0.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
@@ -37,5 +41,8 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
+  ],
+  "files": [
+    "./dist/*"
   ]
 }
