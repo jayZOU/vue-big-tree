@@ -19,6 +19,7 @@
 | tree  | 数据源 |  Array   |  -   |  -   |
 | defaultExpand  | 是否默认展开 |  Boolean   |  true/false   |  false   |
 | option  | 虚拟树配置 |  Object   |  -   |  -   |
+| timeout  | 滚动节流 |  Number   |  -   |  17  |
 
 ### option
 | 参数      |    说明 | 类型  | 可选  | 默认值  |

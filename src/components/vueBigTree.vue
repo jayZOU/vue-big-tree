@@ -15,7 +15,8 @@
         :key="item.id"
         class="b-tree__list-view"
         :style="{
-          paddingLeft: 18 * (item.level - 1) + 'px'
+          paddingLeft: 18 * (item.level - 1) + 'px',
+          height: option.itemHeight + 'px'
         }"
       >
         <i
@@ -98,6 +99,7 @@
 }
 </style>
 <script>
+  let lastTime = 0;
 export default {
   name: "vueBigTree",
   props: {
@@ -112,6 +114,10 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    timeout: { //刷新频率
+      type: Number,
+      default: 17
     },
     option: {
       // 配置对象
@@ -177,7 +183,7 @@ export default {
       });
     },
     visibleCount() {
-      return Math.floor(this.option.height / this.option.itemHeight) * 3;
+      return Math.floor(this.option.height / this.option.itemHeight);
     }
   },
   mounted() {
@@ -190,12 +196,16 @@ export default {
       this.handleScroll();
     },
     handleScroll() {
-      const scrollTop = this.$refs.scroller.scrollTop - this.option.height;
-      this.updateVisibleData(scrollTop > 0 ? scrollTop : 0);
+      let currentTime = +new Date()
+      if(currentTime - lastTime > this.timeout) {
+        this.updateVisibleData(this.$refs.scroller.scrollTop);
+        lastTime = currentTime
+      }
     },
     updateVisibleData(scrollTop = 0) {
-      const start = Math.floor(scrollTop / this.option.itemHeight);
-      const end = start + this.visibleCount;
+      let start = Math.floor(scrollTop / this.option.itemHeight) - Math.floor(this.visibleCount / 2);
+      start = start < 0 ? 0 : start;
+      const end = start + this.visibleCount * 2;
       const allVisibleData = (this.flattenTree || []).filter(
         item => item.visible
       );
